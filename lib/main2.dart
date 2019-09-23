@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
 
 void main() => runApp(new Center(
       child: new MyApp(),
@@ -78,35 +79,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
         backgroundColor: Colors.redAccent,
       ),
-      body: new SplitCalculator(),
-    );
-  }
-}
-
-class SplitCalculator extends StatelessWidget {
-    final cementSection = new Container(
-    child: new FlatButton(
-      child: new Text(
-      "1",
-      textScaleFactor: 2,
-      style: TextStyle(fontStyle: FontStyle.italic),
-    )
-    ),
-    height: 500,
-  );
-  final sandSection = new Container(
-    child: new Text("2"),
-  );
-  final aggregateSection = new Container(
-    child: new Text("3"),
-  );
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Container(
-        child: new Row(
-          children: <Widget>[cementSection, sandSection, aggregateSection],
+      body: new Center(
+        // Center is a layout widget. It takes a single child
+        // and positions it in the middle of the parent.
+        child: new Column(
+          // Column is also layout widget. It takes a List of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          //
+          // mainAxisAlignment and crossAxisAlignment should feel very familiar
+          // if you're used to using CSS's Flexbox or Grid.
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Text(
+              'Coarse Aggregate',
+            ),
+            new Text(
+              // Text takes a String as it's first argument.
+              // We're passing in the value of the counter
+              // as an interpolated String.
+              '$_counter',
+              style: Theme.of(context).textTheme.display4,
+            ),
+          ],
         ),
+      ),
+      // Floating action buttons are special button
+      floatingActionButton: FloatingActionButton(
+        onPressed: _counterIncrementMethod,
+        tooltip: 'Increment written on tooltip',
+        child: new Icon(Icons.plus_one),
+        backgroundColor: Colors.pinkAccent,
       ),
     );
   }
