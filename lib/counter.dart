@@ -26,6 +26,16 @@ class _CounterState extends State<Counter> {
     });
   }
 
+  void _cementDecrementorMethod() {
+    setState(() {
+      if (_cementCounter > 0) {
+        _cementCounter -= 1;
+      } else if (_cementCounter == 0) {
+        _cementCounter = 0;
+      }
+    });
+  }
+
   int _sandCounter = 0;
   void _sandCounterMethod() {
     setState(() {
@@ -44,47 +54,59 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(title: new Text(widget.title)),
-        body: new Container(
-          padding: new EdgeInsets.all(15.0),
-          margin: const EdgeInsets.only(left: 0,right: 0),
-          alignment: Alignment.center,
-          child: new Center(
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                    child: new Column(
-                      children: <Widget>[
+        body: Builder(builder: (BuildContext context) {
+          return new Container(
+            padding: new EdgeInsets.all(15.0),
+            margin: const EdgeInsets.only(left: 0, right: 0),
+            alignment: Alignment.center,
+            child: new Center(
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      child: new Column(
+                    children: <Widget>[
                       new Text('$_cementCounter'),
                       new FlatButton(
                         child: new Text('Cement +1'),
-                        onPressed: _cementCounterMethod,
-                    )
-                  ],
-                )),
-                Container(
-                    child: new Column(
-                      children: <Widget>[
+                        onPressed: () {
+                          _cementCounterMethod();
+                          Scaffold.of(context).showSnackBar(new SnackBar(
+                            content: new Text("Increased by 1"),
+                          ));
+                        },
+                      ),
+                      new FlatButton(
+                        child: new Text('Cement -1'),
+                        onPressed: _cementDecrementorMethod,
+                      ),
+                    ],
+                  )),
+                  Container(
+                      child: new Column(
+                    children: <Widget>[
                       new Text('$_sandCounter'),
                       new FlatButton(
                         child: new Text('Sand +1'),
                         onPressed: _sandCounterMethod,
-                    )
-                  ],
-                )),
-                Container(
-                    child: new Column(
-                      children: <Widget>[
-                        new Text('$_aggregateCounter'),
-                        new FlatButton(
-                          child: new Text('Aggregate +1'),
-                          onPressed: _aggregateCounterMethod,
-                        )
-                  ],
-                ))
-              ],
+                      )
+                    ],
+                  )),
+                  Container(
+                      child: new Column(
+                    children: <Widget>[
+                      new Text('$_aggregateCounter'),
+                      new FlatButton(
+                        child: new Text('Aggregate +1'),
+                        onPressed: _aggregateCounterMethod,
+                      )
+                    ],
+                  ))
+                ],
+              ),
             ),
-          ),
-        ));
+          );
+        })
+    );
   }
 }
