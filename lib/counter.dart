@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // This Widget is Stateful because it's managing the state of the counter.
 class Counter extends StatefulWidget {
@@ -20,33 +21,56 @@ class Counter extends StatefulWidget {
 // This is the state that MyHomePage created.
 class _CounterState extends State<Counter> {
   int _cementCounter = 0;
-  void _cementCounterMethod() {
-    setState(() {
-      _cementCounter += 1;
-    });
-  }
+  int _sandCounter = 0;
+  int _aggregateCounter = 0;
 
-  void _cementDecrementorMethod() {
+  void _incrementMethod(int options) {
     setState(() {
-      if (_cementCounter > 0) {
-        _cementCounter -= 1;
-      } else if (_cementCounter == 0) {
-        _cementCounter = 0;
+      switch (options) {
+        case 1:
+          {
+            _cementCounter += 1;
+          }
+          break;
+        case 2:
+          {
+            _sandCounter += 1;
+          }
+          break;
+        case 3:
+          {
+            _aggregateCounter += 1;
+          }
+          break;
       }
     });
   }
 
-  int _sandCounter = 0;
-  void _sandCounterMethod() {
+  void _decrementorMethod(int options) {
     setState(() {
-      _sandCounter += 1;
-    });
-  }
-
-  int _aggregateCounter = 0;
-  void _aggregateCounterMethod() {
-    setState(() {
-      _aggregateCounter += 1;
+      switch (options) {
+        case 1:
+          {
+            if (_cementCounter > 0) {
+              _cementCounter -= 1;
+            }
+          }
+          break;
+        case 2:
+          {
+            if (_sandCounter > 0) {
+              _sandCounter -= 1;
+            }
+          }
+          break;
+        case 3:
+          {
+            if (_aggregateCounter > 0) {
+              _aggregateCounter -= 1;
+            }
+          }
+          break;
+      }
     });
   }
 
@@ -66,47 +90,140 @@ class _CounterState extends State<Counter> {
                   Container(
                       child: new Column(
                     children: <Widget>[
-                      new Text('$_cementCounter'),
+                      new Text('$_cementCounter',
+                          style: TextStyle(
+                              height: 1.5,
+                              fontSize: 100,
+                              color: Color.fromRGBO(64, 64, 64, 100))),
                       new FlatButton(
                         child: new Text('Cement +1'),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.green[300],
                         onPressed: () {
-                          _cementCounterMethod();
-                          Scaffold.of(context).showSnackBar(new SnackBar(
-                            content: new Text("Increased by 1"),
-                          ));
+                          _incrementToastAction(context, 1);
                         },
                       ),
                       new FlatButton(
                         child: new Text('Cement -1'),
-                        onPressed: _cementDecrementorMethod,
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.red[100],
+                        onPressed: () {
+                          _decrementorAction(context, 1);
+                        },
                       ),
                     ],
                   )),
                   Container(
                       child: new Column(
                     children: <Widget>[
-                      new Text('$_sandCounter'),
+                      new Text('$_sandCounter',
+                          style: TextStyle(
+                              height: 1.5,
+                              fontSize: 100,
+                              color: Color.fromRGBO(64, 64, 64, 100))),
                       new FlatButton(
                         child: new Text('Sand +1'),
-                        onPressed: _sandCounterMethod,
-                      )
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.green[300],
+                        onPressed: () {
+                          _incrementToastAction(context, 2);
+                        },
+                      ),
+                      new FlatButton(
+                        child: new Text('Sand -1'),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.red[100],
+                        onPressed: () {
+                          _decrementorAction(context, 2);
+                        },
+                      ),
                     ],
                   )),
                   Container(
                       child: new Column(
                     children: <Widget>[
-                      new Text('$_aggregateCounter'),
+                      new Text('$_aggregateCounter',
+                          style: TextStyle(
+                              height: 1.5,
+                              fontSize: 100,
+                              color: Color.fromRGBO(64, 64, 64, 100))),
                       new FlatButton(
                         child: new Text('Aggregate +1'),
-                        onPressed: _aggregateCounterMethod,
-                      )
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.green[300],
+                        onPressed: () {
+                          _incrementToastAction(context, 3);
+                        },
+                      ),
+                      new FlatButton(
+                        child: new Text('Aggregate -1'),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.red[100],
+                        onPressed: () {
+                          _decrementorAction(context, 3);
+                        },
+                      ),
                     ],
                   ))
                 ],
               ),
             ),
           );
-        })
-    );
+        }));
+  }
+
+  void _cementIncrementSnackBarAction(BuildContext context) {
+    _incrementMethod(1);
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text("Increased by 1"),
+    ));
+  }
+
+  void _incrementToastAction(BuildContext context, int x) {
+    switch (x) {
+      case 1:{
+      _incrementMethod(x);
+      // Fluttertoast.showToast(
+      //     msg: "Cement +1",
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.CENTER,
+      //     backgroundColor: Colors.grey[300],
+      //     textColor: Colors.black,
+      //     fontSize: 16.0);
+      } break;
+      case 2:{
+      _incrementMethod(x);
+      } break;
+      case 3:{
+      _incrementMethod(x);
+      }
+        break;
+  }
+  }
+
+  void _decrementorAction(BuildContext context, int y) {
+    switch (y) {
+      case 1:
+        {
+          _decrementorMethod(1);
+        }
+        break;
+      case 2:
+        {
+          _decrementorMethod(2);
+        }
+        break;
+      case 3:
+        {
+          _decrementorMethod(3);
+        }
+        break;
+    }
   }
 }
