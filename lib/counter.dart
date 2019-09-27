@@ -20,9 +20,12 @@ class Counter extends StatefulWidget {
 
 // This is the state that MyHomePage created.
 class _CounterState extends State<Counter> {
-  int _cementCounter = 0;
-  int _sandCounter = 0;
-  int _aggregateCounter = 0;
+  String m20Ratio = "M20 Grade 1:1.5:3";
+  double _cementCounter = 0;
+  double _sandRatio = 1.5;
+  double _aggregateRatio = 3;
+  double _sandCounter = 0;
+  double _aggregateCounter = 0;
 
   void _incrementMethod(int options) {
     setState(() {
@@ -30,6 +33,8 @@ class _CounterState extends State<Counter> {
         case 1:
           {
             _cementCounter += 1;
+            _sandCounter = _cementCounter * _sandRatio;
+            _aggregateCounter = _cementCounter * _aggregateRatio;
           }
           break;
         case 2:
@@ -53,6 +58,8 @@ class _CounterState extends State<Counter> {
           {
             if (_cementCounter > 0) {
               _cementCounter -= 1;
+              _sandCounter = _cementCounter * _sandRatio;
+              _aggregateCounter = _cementCounter * _aggregateRatio;
             }
           }
           break;
@@ -80,21 +87,29 @@ class _CounterState extends State<Counter> {
         appBar: new AppBar(title: new Text(widget.title)),
         body: Builder(builder: (BuildContext context) {
           return new Container(
-            padding: new EdgeInsets.all(15.0),
-            margin: const EdgeInsets.only(left: 0, right: 0),
+            padding: new EdgeInsets.all(5.0),
             alignment: Alignment.center,
+            margin: EdgeInsets.all(40),
+            constraints: BoxConstraints(
+                maxHeight: 400, maxWidth: 400, minHeight: 100, minWidth: 100),
             child: new Center(
-              child: new Row(
+              child: new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                      child: new Column(
+                      child: new Row(
                     children: <Widget>[
-                      new Text('$_cementCounter',
+                      new Text(m20Ratio,
                           style: TextStyle(
-                              height: 1.5,
-                              fontSize: 100,
+                              height: 0,
+                              fontSize: 30,
                               color: Color.fromRGBO(64, 64, 64, 100))),
+                    ],
+                  )),
+                  SizedBox(height: 50,),
+                  Container(
+                      child: new Row(
+                    children: <Widget>[
                       new FlatButton(
                         child: new Text('Cement +1'),
                         shape: new RoundedRectangleBorder(
@@ -104,6 +119,11 @@ class _CounterState extends State<Counter> {
                           _incrementToastAction(context, 1);
                         },
                       ),
+                      new Text('$_cementCounter',
+                          style: TextStyle(
+                              height: 0.2,
+                              fontSize: 100,
+                              color: Color.fromRGBO(64, 64, 64, 100))),
                       new FlatButton(
                         child: new Text('Cement -1'),
                         shape: new RoundedRectangleBorder(
@@ -116,59 +136,65 @@ class _CounterState extends State<Counter> {
                     ],
                   )),
                   Container(
-                      child: new Column(
+                      child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      new Text('$_sandCounter',
+                      // new FlatButton(
+                      //   child: new Text('Sand +1'),
+                      //   shape: new RoundedRectangleBorder(
+                      //       borderRadius: new BorderRadius.circular(30.0)),
+                      //   color: Colors.green[300],
+                      //   onPressed: () {
+                      //     _incrementToastAction(context, 2);
+                      //   },
+                      // ),
+                      new Text('Sand \n $_sandCounter',
                           style: TextStyle(
                               height: 1.5,
-                              fontSize: 100,
+                              fontSize: 20,
                               color: Color.fromRGBO(64, 64, 64, 100))),
-                      new FlatButton(
-                        child: new Text('Sand +1'),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.green[300],
-                        onPressed: () {
-                          _incrementToastAction(context, 2);
-                        },
-                      ),
-                      new FlatButton(
-                        child: new Text('Sand -1'),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.red[100],
-                        onPressed: () {
-                          _decrementorAction(context, 2);
-                        },
-                      ),
+                      new Text('Aggregate \n $_aggregateCounter',
+                          style: TextStyle(
+                              height: 1.5,
+                              fontSize: 20,
+                              color: Color.fromRGBO(64, 64, 64, 100))),
+                      // new FlatButton(
+                      //   child: new Text('Sand -1'),
+                      //   shape: new RoundedRectangleBorder(
+                      //       borderRadius: new BorderRadius.circular(30.0)),
+                      //   color: Colors.red[100],
+                      //   onPressed: () {
+                      //     _decrementorAction(context, 2);
+                      //   },
+                      // ),
                     ],
                   )),
                   Container(
-                      child: new Column(
+                      child: new Row(
                     children: <Widget>[
-                      new Text('$_aggregateCounter',
-                          style: TextStyle(
-                              height: 1.5,
-                              fontSize: 100,
-                              color: Color.fromRGBO(64, 64, 64, 100))),
-                      new FlatButton(
-                        child: new Text('Aggregate +1'),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.green[300],
-                        onPressed: () {
-                          _incrementToastAction(context, 3);
-                        },
-                      ),
-                      new FlatButton(
-                        child: new Text('Aggregate -1'),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.red[100],
-                        onPressed: () {
-                          _decrementorAction(context, 3);
-                        },
-                      ),
+                      // new FlatButton(
+                      //   child: new Text('Aggregate +1'),
+                      //   shape: new RoundedRectangleBorder(
+                      //       borderRadius: new BorderRadius.circular(30.0)),
+                      //   color: Colors.green[300],
+                      //   onPressed: () {
+                      //     _incrementToastAction(context, 3);
+                      //   },
+                      // ),
+                      // new Text('Aggregate \n $_aggregateCounter',
+                      //     style: TextStyle(
+                      //         height: 1.5,
+                      //         fontSize: 20,
+                      //         color: Color.fromRGBO(64, 64, 64, 100))),
+                      // new FlatButton(
+                      //   child: new Text('Aggregate -1'),
+                      //   shape: new RoundedRectangleBorder(
+                      //       borderRadius: new BorderRadius.circular(30.0)),
+                      //   color: Colors.red[100],
+                      //   onPressed: () {
+                      //     _decrementorAction(context, 3);
+                      //   },
+                      // ),
                     ],
                   ))
                 ],
@@ -178,33 +204,38 @@ class _CounterState extends State<Counter> {
         }));
   }
 
-  void _cementIncrementSnackBarAction(BuildContext context) {
-    _incrementMethod(1);
-    Scaffold.of(context).showSnackBar(new SnackBar(
-      content: new Text("Increased by 1"),
-    ));
-  }
+  // void _cementIncrementSnackBarAction(BuildContext context) {
+  //   _incrementMethod(1);
+  //   Scaffold.of(context).showSnackBar(new SnackBar(
+  //     content: new Text("Increased by 1"),
+  //   ));
+  // }
 
   void _incrementToastAction(BuildContext context, int x) {
     switch (x) {
-      case 1:{
-      _incrementMethod(x);
-      // Fluttertoast.showToast(
-      //     msg: "Cement +1",
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.CENTER,
-      //     backgroundColor: Colors.grey[300],
-      //     textColor: Colors.black,
-      //     fontSize: 16.0);
-      } break;
-      case 2:{
-      _incrementMethod(x);
-      } break;
-      case 3:{
-      _incrementMethod(x);
-      }
+      case 1:
+        {
+          _incrementMethod(x);
+          // Fluttertoast.showToast(
+          //     msg: "Cement +1",
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     backgroundColor: Colors.grey[300],
+          //     textColor: Colors.black,
+          //     fontSize: 16.0);
+        }
         break;
-  }
+      case 2:
+        {
+          _incrementMethod(x);
+        }
+        break;
+      case 3:
+        {
+          _incrementMethod(x);
+        }
+        break;
+    }
   }
 
   void _decrementorAction(BuildContext context, int y) {
