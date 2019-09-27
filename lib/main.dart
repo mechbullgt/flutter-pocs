@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_to/counter.dart';
+import 'package:mrcounter/counter.dart';
 
 void main() => runApp(new Center(
       child: new MyApp(),
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Counter(title: "Mr. Counter",),
+      home: Counter (title:"Mr Counter",),
     );
   }
 }
