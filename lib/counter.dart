@@ -83,6 +83,112 @@ class _CounterState extends State<Counter> {
 
   @override
   Widget build(BuildContext context) {
+    Container firstContainer = new Container(
+        child: new Row(
+      children: <Widget>[
+        new Text(m20Ratio,
+            style: TextStyle(
+                height: 0,
+                fontSize: 30,
+                color: Color.fromRGBO(64, 64, 64, 100))),
+      ],
+    ));
+
+    Container belowFirstContainer = new Container(
+      child: new Text('$_cementCounter',
+          style: TextStyle(
+              height: 0, fontSize: 30, color: Color.fromRGBO(64, 64, 64, 100))),
+    );
+
+    Container secondContainer = new Container(
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        new FlatButton(
+          child: new Text('Cement +1'),
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
+          color: Colors.green[300],
+          onPressed: () {
+            _incrementToastAction(context, 1);
+          },
+        ),
+        new FlatButton(
+          child: new Text('Cement -1'),
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
+          color: Colors.red[100],
+          onPressed: () {
+            _decrementorAction(context, 1);
+          },
+        ),
+      ],
+    ));
+
+    Container thirdContainer = new Container(
+        child: new Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        // new FlatButton(
+        //   child: new Text('Sand +1'),
+        //   shape: new RoundedRectangleBorder(
+        //       borderRadius: new BorderRadius.circular(30.0)),
+        //   color: Colors.green[300],
+        //   onPressed: () {
+        //     _incrementToastAction(context, 2);
+        //   },
+        // ),
+        new Text('Sand \n $_sandCounter',
+            style: TextStyle(
+                height: 1.5,
+                fontSize: 20,
+                color: Color.fromRGBO(64, 64, 64, 100))),
+        new Text('Aggregate \n $_aggregateCounter',
+            style: TextStyle(
+                height: 1.5,
+                fontSize: 20,
+                color: Color.fromRGBO(64, 64, 64, 100))),
+        // new FlatButton(
+        //   child: new Text('Sand -1'),
+        //   shape: new RoundedRectangleBorder(
+        //       borderRadius: new BorderRadius.circular(30.0)),
+        //   color: Colors.red[100],
+        //   onPressed: () {
+        //     _decrementorAction(context, 2);
+        //   },
+        // ),
+      ],
+    ));
+
+    Container forthContainer = new Container(
+        child: new Row(
+      children: <Widget>[
+        // new FlatButton(
+        //   child: new Text('Aggregate +1'),
+        //   shape: new RoundedRectangleBorder(
+        //       borderRadius: new BorderRadius.circular(30.0)),
+        //   color: Colors.green[300],
+        //   onPressed: () {
+        //     _incrementToastAction(context, 3);
+        //   },
+        // ),
+        // new Text('Aggregate \n $_aggregateCounter',
+        //     style: TextStyle(
+        //         height: 1.5,
+        //         fontSize: 20,
+        //         color: Color.fromRGBO(64, 64, 64, 100))),
+        // new FlatButton(
+        //   child: new Text('Aggregate -1'),
+        //   shape: new RoundedRectangleBorder(
+        //       borderRadius: new BorderRadius.circular(30.0)),
+        //   color: Colors.red[100],
+        //   onPressed: () {
+        //     _decrementorAction(context, 3);
+        //   },
+        // ),
+      ],
+    ));
+
     return new Scaffold(
         appBar: new AppBar(title: new Text(widget.title)),
         body: Builder(builder: (BuildContext context) {
@@ -96,107 +202,14 @@ class _CounterState extends State<Counter> {
               child: new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                      child: new Row(
-                    children: <Widget>[
-                      new Text(m20Ratio,
-                          style: TextStyle(
-                              height: 0,
-                              fontSize: 30,
-                              color: Color.fromRGBO(64, 64, 64, 100))),
-                    ],
-                  )),
-                  SizedBox(height: 50,),
-                  Container(
-                      child: new Row(
-                    children: <Widget>[
-                      new FlatButton(
-                        child: new Text('Cement +1'),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.green[300],
-                        onPressed: () {
-                          _incrementToastAction(context, 1);
-                        },
-                      ),
-                      new Text('$_cementCounter',
-                          style: TextStyle(
-                              height: 0.2,
-                              fontSize: 100,
-                              color: Color.fromRGBO(64, 64, 64, 100))),
-                      new FlatButton(
-                        child: new Text('Cement -1'),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.red[100],
-                        onPressed: () {
-                          _decrementorAction(context, 1);
-                        },
-                      ),
-                    ],
-                  )),
-                  Container(
-                      child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      // new FlatButton(
-                      //   child: new Text('Sand +1'),
-                      //   shape: new RoundedRectangleBorder(
-                      //       borderRadius: new BorderRadius.circular(30.0)),
-                      //   color: Colors.green[300],
-                      //   onPressed: () {
-                      //     _incrementToastAction(context, 2);
-                      //   },
-                      // ),
-                      new Text('Sand \n $_sandCounter',
-                          style: TextStyle(
-                              height: 1.5,
-                              fontSize: 20,
-                              color: Color.fromRGBO(64, 64, 64, 100))),
-                      new Text('Aggregate \n $_aggregateCounter',
-                          style: TextStyle(
-                              height: 1.5,
-                              fontSize: 20,
-                              color: Color.fromRGBO(64, 64, 64, 100))),
-                      // new FlatButton(
-                      //   child: new Text('Sand -1'),
-                      //   shape: new RoundedRectangleBorder(
-                      //       borderRadius: new BorderRadius.circular(30.0)),
-                      //   color: Colors.red[100],
-                      //   onPressed: () {
-                      //     _decrementorAction(context, 2);
-                      //   },
-                      // ),
-                    ],
-                  )),
-                  Container(
-                      child: new Row(
-                    children: <Widget>[
-                      // new FlatButton(
-                      //   child: new Text('Aggregate +1'),
-                      //   shape: new RoundedRectangleBorder(
-                      //       borderRadius: new BorderRadius.circular(30.0)),
-                      //   color: Colors.green[300],
-                      //   onPressed: () {
-                      //     _incrementToastAction(context, 3);
-                      //   },
-                      // ),
-                      // new Text('Aggregate \n $_aggregateCounter',
-                      //     style: TextStyle(
-                      //         height: 1.5,
-                      //         fontSize: 20,
-                      //         color: Color.fromRGBO(64, 64, 64, 100))),
-                      // new FlatButton(
-                      //   child: new Text('Aggregate -1'),
-                      //   shape: new RoundedRectangleBorder(
-                      //       borderRadius: new BorderRadius.circular(30.0)),
-                      //   color: Colors.red[100],
-                      //   onPressed: () {
-                      //     _decrementorAction(context, 3);
-                      //   },
-                      // ),
-                    ],
-                  ))
+                  firstContainer,
+                  SizedBox(
+                    height: 50,
+                  ),
+                  belowFirstContainer,
+                  secondContainer,
+                  thirdContainer,
+                  forthContainer
                 ],
               ),
             ),
