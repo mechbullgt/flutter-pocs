@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Beams extends StatefulWidget {
   @override
@@ -7,41 +8,41 @@ class Beams extends StatefulWidget {
 
 class _BeamState extends State<Beams> {
   String m20Ratio = "M20 Grade 1:1.5:3";
-  var m20=[1.5,3];
-  double sandRatio=0;
-  double aggregateRatio=0;
+  var m20 = [1.5, 3];
+  double sandRatio = 0;
+  double aggregateRatio = 0;
 
-void setSandRatio(int grade){
-if(grade==20){
-    sandRatio= m20[0];
-  debugPrint('Setting Sand Ratio:'+'$sandRatio');
-}
-}
-
-double getSandRatio(int grade){
-  double currentRatio;
-if(grade==20){
-currentRatio = sandRatio;
-      debugPrint('Getting Sand Ratio:'+'$currentRatio');
-}
-return currentRatio;
-}
-
-void setAggregateRatio(int grade){
-if(grade==20){
-  aggregateRatio= (m20[1]).toDouble();
-  debugPrint('Setting Aggregate Ratio:'+'$aggregateRatio');
-}
-}
-
-double getArrgregateRatio (double grade){
-  double currentRatio;
-  if(grade==20){
-      currentRatio= aggregateRatio;
-      debugPrint('Getting Aggregate Ratio:'+'$currentRatio');
+  void setSandRatio(int grade) {
+    if (grade == 20) {
+      sandRatio = m20[0];
+      debugPrint('Setting Sand Ratio:' + '$sandRatio');
+    }
   }
-  return currentRatio;
-}
+
+  double getSandRatio(int grade) {
+    double currentRatio;
+    if (grade == 20) {
+      currentRatio = sandRatio;
+      debugPrint('Getting Sand Ratio:' + '$currentRatio');
+    }
+    return currentRatio;
+  }
+
+  void setAggregateRatio(int grade) {
+    if (grade == 20) {
+      aggregateRatio = (m20[1]).toDouble();
+      debugPrint('Setting Aggregate Ratio:' + '$aggregateRatio');
+    }
+  }
+
+  double getArrgregateRatio(double grade) {
+    double currentRatio;
+    if (grade == 20) {
+      currentRatio = aggregateRatio;
+      debugPrint('Getting Aggregate Ratio:' + '$currentRatio');
+    }
+    return currentRatio;
+  }
 
   double _cementCounter = 0;
   double _sandCounter = 0;
@@ -148,12 +149,20 @@ double getArrgregateRatio (double grade){
     }
   }
 
-void feedNumbers(int grade){
-if(grade==20){
-  setSandRatio(20);
-  setAggregateRatio(20);    
-}
-}
+  void feedNumbers(int grade) {
+    if (grade == 20) {
+      setSandRatio(20);
+      setAggregateRatio(20);
+      Fluttertoast.showToast(
+          msg: "Selected Concrete Grade M20",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.grey[300],
+          textColor: Colors.black,
+          fontSize: 16.0,
+          );
+    } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,14 +170,16 @@ if(grade==20){
         child: new Row(
       children: <Widget>[
         new RaisedButton(
-                    padding: const EdgeInsets.all(8.0),
-                    textColor: Colors.white,
-                    color: Colors.blue,
-                    onPressed: (){
-                      debugPrint("Print from Raised button");
-                      feedNumbers(20);},
-                    child: new Text("Grade M20"),
-        )],
+          padding: const EdgeInsets.all(8.0),
+          textColor: Colors.white,
+          color: Colors.blue,
+          onPressed: () {
+            debugPrint("Print from Raised button");
+            feedNumbers(20);
+          },
+          child: new Text("Grade M20"),
+        )
+      ],
     ));
 
     Container belowFirstContainer = new Container(
