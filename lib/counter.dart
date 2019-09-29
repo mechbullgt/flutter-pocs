@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mrcounter/tabs/beams.dart';
+import 'package:mrcounter/tabs/footing.dart';
 import 'package:mrcounter/tabs/slab.dart';
 
 // This Widget is Stateful because it's managing the state of the counter.
@@ -40,13 +41,16 @@ class _CounterState extends State<Counter> with SingleTickerProviderStateMixin {
       tabs: <Tab>[
         Tab(
           // set icon to the tab
-          icon: Icon(Icons.favorite),
+          icon: Icon(Icons.clear_all),
+          text: "Slabs",
         ),
         Tab(
-          icon: Icon(Icons.adb),
+          icon: Icon(Icons.crop_16_9),
+          text: "Columns &\n Beams",
         ),
         Tab(
-          icon: Icon(Icons.airport_shuttle),
+          icon: Icon(Icons.border_clear),
+          text: "Footing",
         ),
       ],
       // setup the controller
@@ -70,7 +74,7 @@ class _CounterState extends State<Counter> with SingleTickerProviderStateMixin {
         title: new Text(widget.title),
         bottom: getTabBar(),
       ),
-      body: getTabBarView(<Widget>[Slab(),Beams(), Slab()]),
+      body: getTabBarView(<Widget>[Slab(),Beams(), Footing()]),
     );
   }
 }

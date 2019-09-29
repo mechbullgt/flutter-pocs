@@ -2,32 +2,59 @@ import 'package:flutter/material.dart';
 
 class Beams extends StatefulWidget {
   @override
-  _ColumnState createState() => new _ColumnState();
+  _BeamState createState() => new _BeamState();
 }
 
-class _ColumnState extends State<Beams> {
+class _BeamState extends State<Beams> {
   String m20Ratio = "M20 Grade 1:1.5:3";
+  var m20=[1.5,3];
+  double sandRatio=0;
+  double aggregateRatio=0;
+
+void setSandRatio(int grade){
+if(grade==20){
+    sandRatio= m20[0];
+  debugPrint('Setting Sand Ratio:'+'$sandRatio');
+}
+}
+
+double getSandRatio(int grade){
+  double currentRatio;
+if(grade==20){
+currentRatio = sandRatio;
+      debugPrint('Getting Sand Ratio:'+'$currentRatio');
+}
+return currentRatio;
+}
+
+void setAggregateRatio(int grade){
+if(grade==20){
+  aggregateRatio= (m20[1]).toDouble();
+  debugPrint('Setting Aggregate Ratio:'+'$aggregateRatio');
+}
+}
+
+double getArrgregateRatio (double grade){
+  double currentRatio;
+  if(grade==20){
+      currentRatio= aggregateRatio;
+      debugPrint('Getting Aggregate Ratio:'+'$currentRatio');
+  }
+  return currentRatio;
+}
+
   double _cementCounter = 0;
-  double _sandRatio = 1.5;
-  double _aggregateRatio = 3;
   double _sandCounter = 0;
   double _aggregateCounter = 0;
 
-//  final String m20Ratio = "M20 Grade 1:1.5:3";
-//  final double _cementCounter = 0;
-//  final double _sandRatio = 1.5;
-//  final double _aggregateRatio = 3;
-//  final double _sandCounter = 0;
-//  final double _aggregateCounter = 0;
-
-  void _incrementMethod(int options) {
+  void _incrementMethod(int grade) {
     setState(() {
-      switch (options) {
-        case 1:
+      switch (grade) {
+        case 20:
           {
             _cementCounter += 1;
-            _sandCounter = _cementCounter * _sandRatio;
-            _aggregateCounter = _cementCounter * _aggregateRatio;
+            _sandCounter = _cementCounter * getSandRatio(20);
+            _aggregateCounter = _cementCounter * getArrgregateRatio(20);
           }
           break;
         case 2:
@@ -47,12 +74,12 @@ class _ColumnState extends State<Beams> {
   void _decrementorMethod(int options) {
     setState(() {
       switch (options) {
-        case 1:
+        case 20:
           {
             if (_cementCounter > 0) {
               _cementCounter -= 1;
-              _sandCounter = _cementCounter * _sandRatio;
-              _aggregateCounter = _cementCounter * _aggregateRatio;
+              _sandCounter = _cementCounter * getSandRatio(20);
+              _aggregateCounter = _cementCounter * getArrgregateRatio(20);
             }
           }
           break;
@@ -76,9 +103,9 @@ class _ColumnState extends State<Beams> {
 
   void _incrementToastAction(BuildContext context, int x) {
     switch (x) {
-      case 1:
+      case 20:
         {
-          _incrementMethod(x);
+          _incrementMethod(20);
           // Fluttertoast.showToast(
           //     msg: "Cement +1",
           //     toastLength: Toast.LENGTH_SHORT,
@@ -103,9 +130,9 @@ class _ColumnState extends State<Beams> {
 
   void _decrementorAction(BuildContext context, int y) {
     switch (y) {
-      case 1:
+      case 20:
         {
-          _decrementorMethod(1);
+          _decrementorMethod(20);
         }
         break;
       case 2:
@@ -121,17 +148,27 @@ class _ColumnState extends State<Beams> {
     }
   }
 
+void feedNumbers(int grade){
+if(grade==20){
+  setSandRatio(20);
+  setAggregateRatio(20);    
+}
+}
+
   @override
   Widget build(BuildContext context) {
     Container firstContainer = new Container(
         child: new Row(
       children: <Widget>[
-        new Text(m20Ratio,
-            style: TextStyle(
-                height: 0,
-                fontSize: 30,
-                color: Color.fromRGBO(64, 64, 64, 100))),
-      ],
+        new RaisedButton(
+                    padding: const EdgeInsets.all(8.0),
+                    textColor: Colors.white,
+                    color: Colors.blue,
+                    onPressed: (){
+                      debugPrint("Print from Raised button");
+                      feedNumbers(20);},
+                    child: new Text("Grade M20"),
+        )],
     ));
 
     Container belowFirstContainer = new Container(
@@ -150,7 +187,7 @@ class _ColumnState extends State<Beams> {
               borderRadius: new BorderRadius.circular(30.0)),
           color: Colors.green[300],
           onPressed: () {
-            _incrementToastAction(context, 1);
+            _incrementToastAction(context, 20);
           },
         ),
         new FlatButton(
@@ -159,7 +196,7 @@ class _ColumnState extends State<Beams> {
               borderRadius: new BorderRadius.circular(30.0)),
           color: Colors.red[100],
           onPressed: () {
-            _decrementorAction(context, 1);
+            _decrementorAction(context, 20);
           },
         ),
       ],

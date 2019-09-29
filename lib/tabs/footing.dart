@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Slab extends StatelessWidget {
+class Footing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,11 +10,11 @@ class Slab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(
-              Icons.clear_all,
+              Icons.border_clear,
               size: 160.0,
-              color: Colors.grey,
+              color: Colors.black,
             ),
-            Text("Slabs Tab")
+            Text("Footing Tab")
           ],
         ),
       ),
