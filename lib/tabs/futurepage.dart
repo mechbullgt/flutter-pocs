@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Footing extends StatelessWidget {
+class FuturePage extends StatefulWidget {
+  const FuturePage({Key key}) : super(key: key);
+  @override
+  _FuturePageState createState() => new _FuturePageState();
+}
+
+class _FuturePageState extends State<FuturePage>{
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
+    return Scaffold(
+      body:Center(
         child: Column(
           // center the children
           mainAxisAlignment: MainAxisAlignment.center,
@@ -14,7 +20,7 @@ class Footing extends StatelessWidget {
               size: 160.0,
               color: Colors.black,
             ),
-            Text("Footing Tab")
+            Text("Future Page")
           ],
         ),
       ),

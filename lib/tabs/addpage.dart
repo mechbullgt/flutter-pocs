@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Beams extends StatefulWidget {
+class AddPage extends StatefulWidget {
+  const AddPage({Key key}) : super(key: key);
   @override
   _BeamState createState() => new _BeamState();
 }
 
-class _BeamState extends State<Beams> {
+class _BeamState extends State<AddPage> {
   String m20Ratio = "M20 Grade 1:1.5:3";
   var m20 = [1.5, 3];
   double sandRatio = 0;
@@ -154,14 +155,14 @@ class _BeamState extends State<Beams> {
       setSandRatio(20);
       setAggregateRatio(20);
       Fluttertoast.showToast(
-          msg: "Selected Concrete Grade M20",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.grey[300],
-          textColor: Colors.black,
-          fontSize: 16.0,
-          );
-    } 
+        msg: "Selected Concrete Grade M20",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey[300],
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+    }
   }
 
   @override
@@ -217,15 +218,6 @@ class _BeamState extends State<Beams> {
         child: new Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        // new FlatButton(
-        //   child: new Text('Sand +1'),
-        //   shape: new RoundedRectangleBorder(
-        //       borderRadius: new BorderRadius.circular(30.0)),
-        //   color: Colors.green[300],
-        //   onPressed: () {
-        //     _incrementToastAction(context, 2);
-        //   },
-        // ),
         new Text('Sand \n $_sandCounter',
             style: TextStyle(
                 height: 1.5,
@@ -236,67 +228,30 @@ class _BeamState extends State<Beams> {
                 height: 1.5,
                 fontSize: 20,
                 color: Color.fromRGBO(64, 64, 64, 100))),
-        // new FlatButton(
-        //   child: new Text('Sand -1'),
-        //   shape: new RoundedRectangleBorder(
-        //       borderRadius: new BorderRadius.circular(30.0)),
-        //   color: Colors.red[100],
-        //   onPressed: () {
-        //     _decrementorAction(context, 2);
-        //   },
-        // ),
       ],
     ));
 
-    Container forthContainer = new Container(
-        child: new Row(
-      children: <Widget>[
-        // new FlatButton(
-        //   child: new Text('Aggregate +1'),
-        //   shape: new RoundedRectangleBorder(
-        //       borderRadius: new BorderRadius.circular(30.0)),
-        //   color: Colors.green[300],
-        //   onPressed: () {
-        //     _incrementToastAction(context, 3);
-        //   },
-        // ),
-        // new Text('Aggregate \n $_aggregateCounter',
-        //     style: TextStyle(
-        //         height: 1.5,
-        //         fontSize: 20,
-        //         color: Color.fromRGBO(64, 64, 64, 100))),
-        // new FlatButton(
-        //   child: new Text('Aggregate -1'),
-        //   shape: new RoundedRectangleBorder(
-        //       borderRadius: new BorderRadius.circular(30.0)),
-        //   color: Colors.red[100],
-        //   onPressed: () {
-        //     _decrementorAction(context, 3);
-        //   },
-        // ),
-      ],
-    ));
-
-    return Container(
-      padding: new EdgeInsets.all(5.0),
-      alignment: Alignment.center,
-      margin: EdgeInsets.all(40),
-      constraints: BoxConstraints(
-          maxHeight: 400, maxWidth: 400, minHeight: 300, minWidth: 200),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            firstContainer,
-            SizedBox(
-              height: 50,
+    return Scaffold(
+        body: Center(
+            child: Container(
+          padding: new EdgeInsets.all(5.0),
+          alignment: Alignment.center,
+          margin: EdgeInsets.all(40),
+          constraints: BoxConstraints(
+              maxHeight: 400, maxWidth: 400, minHeight: 300, minWidth: 200),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                firstContainer,
+                SizedBox(
+                  height: 50,
+                ),
+                belowFirstContainer,
+                secondContainer,
+                thirdContainer,
+              ],
             ),
-            belowFirstContainer,
-            secondContainer,
-            thirdContainer,
-            forthContainer
-          ],
-        ),
-      ),
-    );
+          ),
+        )));
   }
 }

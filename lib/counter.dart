@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mrcounter/tabs/beams.dart';
-import 'package:mrcounter/tabs/footing.dart';
-import 'package:mrcounter/tabs/placeholder.dart';
-import 'package:mrcounter/tabs/slab.dart';
+import 'package:mrcounter/tabs/addpage.dart';
+import 'package:mrcounter/tabs/futurepage.dart';
+import 'package:mrcounter/tabs/viewdatapage.dart';
 
 // This Widget is Stateful because it's managing the state of the counter.
 class Counter extends StatefulWidget {
@@ -24,13 +23,14 @@ class Counter extends StatefulWidget {
 // This is the state that MyHomePage created.
 class _CounterState extends State<Counter> {
   int _currentIndex = 0;
-  // final List<Widget> _navChildren = [Footing(), Slab(),Beams()];
+  final PageStorageBucket bucket = PageStorageBucket();
 
   final List<Widget> _navChildren = [
-  PlaceholderWidget(Colors.red),
-  PlaceholderWidget(Colors.green),
-  PlaceholderWidget(Colors.yellow),
-  ];
+    ViewDataPage(key: PageStorageKey('Page2')),
+    AddPage(key:PageStorageKey('Page1')),
+    FuturePage(key: PageStorageKey('Page3'),)
+    ];
+
   void _incrementTab(index) {
     setState(() {
       _currentIndex = index;
@@ -75,10 +75,9 @@ class _CounterState extends State<Counter> {
         appBar: new AppBar(
           title: new Text(widget.title),
         ),
-        body: Center(
-          child: Column(
-            children: _navChildren,
-          ),
+        body: PageStorage(
+          child: _navChildren[_currentIndex],
+          bucket: bucket,
         ),
         bottomNavigationBar: getBottomNavBar());
   }
