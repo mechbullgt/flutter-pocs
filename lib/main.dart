@@ -12,13 +12,13 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Mr. Counter',
+      title: 'Ghar Depot',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
       debugShowCheckedModeBanner: false,
       home: Counter(
-        title: "Mr Counter",
+        title: "Ghar Depot",
       ),
     );
   }
