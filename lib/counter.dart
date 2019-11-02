@@ -26,8 +26,8 @@ class _CounterState extends State<Counter> {
   final PageStorageBucket bucket = PageStorageBucket();
 
   final List<Widget> _navChildren = [
-    ViewDataPage(key: PageStorageKey('Page2')),
     AddPage(key:PageStorageKey('Page1')),
+    ViewDataPage(key: PageStorageKey('Page2')),
     FuturePage(key: PageStorageKey('Page3'),)
     ];
 
