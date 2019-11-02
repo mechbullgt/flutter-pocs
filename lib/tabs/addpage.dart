@@ -10,6 +10,12 @@ class _AddPageState extends State<AddPage> {
   var formattedDate;
   var formattedDateWeekDay;
   static String _pickedDateString = '';
+  int locationIndex;
+  var siteLocations = <String>['Rainbow', 'Khurana', 'Sao', 'Bhadoria'];
+  int labourIndex;
+  var labourList = <String>['Ram', 'Sukru', 'Babu', 'Bansi'];
+
+
   Future _selectDate() async {
     DateTime picked = await showDatePicker(
         context: context,
@@ -21,7 +27,7 @@ class _AddPageState extends State<AddPage> {
 
   dynamic checkDateString() {
     if (_pickedDateString.length < 1) {
-      return new Text("Please Select Date");
+      return new Text("\t\t" + "Please Select Date");
     }
     var date = DateTime.parse(_pickedDateString);
     formattedDate = "${date.day} / ${date.month} / ${date.year}";
@@ -54,7 +60,7 @@ class _AddPageState extends State<AddPage> {
 
   Container dateContainer() {
     return Container(
-      padding: new EdgeInsets.all(18.0),
+      padding: new EdgeInsets.fromLTRB(0, 10, 0, 0),
       child: new Center(
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,15 +81,118 @@ class _AddPageState extends State<AddPage> {
     );
   }
 
+  Container siteLocationDropDownContainer() {
+    return new Container(
+      padding: new EdgeInsets.fromLTRB(0, 0, 0, 0),
+      child: Center(
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+            new Icon(
+              Icons.location_city,
+              size: 30,
+            ),
+            DropdownButton<String>(
+              hint: new Text('\t\t' + 'Pickup a site'),
+              value:
+                  locationIndex == null ? null : siteLocations[locationIndex],
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String newValue) {
+                setState(() {
+                  locationIndex = siteLocations.indexOf(newValue);
+                });
+              },
+              items:
+                  siteLocations.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text("\t\t\t" + value),
+                );
+              }).toList(),
+            ),
+          ])),
+    );
+  }
+
+ dynamic addLabourController() {
+    print("Add Labour");
+    return new DropdownButton<String>(
+              hint: new Text('\t\Select Name'),
+              value:
+                  labourIndex == null ? null : labourList[labourIndex],
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String newValue) {
+                setState(() {
+                  labourIndex = labourList.indexOf(newValue);
+                });
+              },
+              items:
+                  labourList.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text("\t\t\t" + value),
+                );
+              }).toList(),
+            );
+  }
+
+// _updateLabourWidgetsList(){
+//   setState(() {
+    
+//   });
+// }
+
+// List<Widget> labourWidgets=<Widget>[
+//           new RaisedButton(
+//             color: Colors.blue,
+//             padding: const EdgeInsets.all(8.0),
+//             child: Row(children: <Widget>[
+//               Icon(Icons.person_add),
+//               Text('\t\tAdd Labour')
+//             ]),
+//             onPressed: _updateLabourWidgetsList,
+//           ),
+//         ];
+
+  Container addLabourContainer() {
+    return Container(
+        child: Column(
+        children: <Widget>[
+          Text("Add Labour Details Below",textScaleFactor: 1.2,),
+          addLabourController()
+        ]
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: Center(
-      child: Column(
+        body: Column(
         children: <Widget>[
-          dateContainer(),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                dateContainer(),
+                siteLocationDropDownContainer(),
+              ]),
+          addLabourContainer()
         ],
       ),
-    ));
+    );
   }
 }
