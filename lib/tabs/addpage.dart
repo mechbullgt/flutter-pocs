@@ -15,7 +15,6 @@ class _AddPageState extends State<AddPage> {
   int labourIndex;
   var labourList = <String>['Ram', 'Sukru', 'Babu', 'Bansi'];
 
-
   Future _selectDate() async {
     DateTime picked = await showDatePicker(
         context: context,
@@ -121,38 +120,36 @@ class _AddPageState extends State<AddPage> {
     );
   }
 
- dynamic addLabourController() {
+  dynamic addLabourController() {
     print("Add Labour");
     return new DropdownButton<String>(
-              hint: new Text('\t\Select Name'),
-              value:
-                  labourIndex == null ? null : labourList[labourIndex],
-              icon: Icon(Icons.arrow_downward),
-              iconSize: 24,
-              elevation: 16,
-              style: TextStyle(color: Colors.deepPurple),
-              underline: Container(
-                height: 2,
-                color: Colors.deepPurpleAccent,
-              ),
-              onChanged: (String newValue) {
-                setState(() {
-                  labourIndex = labourList.indexOf(newValue);
-                });
-              },
-              items:
-                  labourList.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text("\t\t\t" + value),
-                );
-              }).toList(),
-            );
+      hint: new Text('\t\Select Name'),
+      value: labourIndex == null ? null : labourList[labourIndex],
+      icon: Icon(Icons.arrow_downward),
+      iconSize: 24,
+      elevation: 16,
+      style: TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+          labourIndex = labourList.indexOf(newValue);
+        });
+      },
+      items: labourList.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text("\t\t\t" + value),
+        );
+      }).toList(),
+    );
   }
 
 // _updateLabourWidgetsList(){
 //   setState(() {
-    
+
 //   });
 // }
 
@@ -170,19 +167,27 @@ class _AddPageState extends State<AddPage> {
 
   Container addLabourContainer() {
     return Container(
-        child: Column(
-        children: <Widget>[
-          Text("Add Labour Details Below",textScaleFactor: 1.2,),
-          addLabourController()
-        ]
-      ),
+      child: Column(children: <Widget>[
+        Text(
+          "Add Labour Details Below",
+          textScaleFactor: 1.2,
+        ),
+        Column(children: <Widget>[
+          addLabourController(),
+          addLabourController(),
+          addLabourController(),
+          addLabourController(),
+          addLabourController(),
+          addLabourController(),
+        ]),
+      ]),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: Column(
+      body: Column(
         children: <Widget>[
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
